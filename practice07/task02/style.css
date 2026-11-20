@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+#add-height {
+    background-color: green;
+}
+
+#filter-heights {
+    background-color: orange;
+}
+
+#height-list {
+    list-style: none;
+    padding: 0;
+}
+
+#height-list li {
+    padding: 4px 0;
+}
