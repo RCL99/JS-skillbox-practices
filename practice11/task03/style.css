@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+.field {
+    margin-bottom: 10px;
+}
+
+.field input,
+.field select {
+    display: block;
+    padding: 6px;
+    border: 1px solid gray;
+}
+
+#card {
+    width: 350px;
+    height: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+    font-size: 20px;
+}
