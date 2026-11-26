@@ -18,12 +18,16 @@ h1 {
     border: 1px solid gray;
 }
 
-#card {
+.card {
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
     width: 350px;
-    height: 200px;
+    aspect-ratio: 1.586;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 16px;
     background-color: red;
     color: white;
     font-size: 20px;
+    font-weight: bold;
 }
