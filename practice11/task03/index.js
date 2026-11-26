@@ -1,6 +1,6 @@
-const cardText = document.getElementById('card-text');
-const cardColor = document.getElementById('card-color');
-const card = document.getElementById('card');
+const cardText = document.querySelector('.card-text');
+const cardColor = document.querySelector('.card-color');
+const card = document.querySelector('.card');
 
 cardText.addEventListener('input', () => {
     card.textContent = cardText.value;

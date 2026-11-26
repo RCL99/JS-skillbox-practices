@@ -22,10 +22,10 @@ h1 {
     border-color: blue;
 }
 
-#full-image {
+.full-image {
     min-height: 200px;
 }
 
-#full-image img {
+.full-image img {
     max-width: 100%;
 }

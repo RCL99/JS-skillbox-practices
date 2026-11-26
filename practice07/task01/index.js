@@ -6,16 +6,16 @@ const books = [
     'Отцы и дети'
 ];
 
-const bookList = document.getElementById('book-list');
-const addButton = document.getElementById('add-book');
-const searchButton = document.getElementById('search-book');
+const bookList = document.querySelector('.book-list');
+const addButton = document.querySelector('.add-book');
+const searchButton = document.querySelector('.search-book');
 
 let foundBooks = [];
 
-function render() {
+const render = () => {
     bookList.innerHTML = '';
 
-    books.forEach(function (book, index) {
+    books.forEach((book, index) => {
         const item = document.createElement('li');
         item.textContent = book;
 
@@ -25,9 +25,9 @@ function render() {
 
         bookList.appendChild(item);
     });
-}
+};
 
-function addBook() {
+const addBook = () => {
     const title = prompt('Введите название книги');
 
     if (title === null || title.trim() === '') {
@@ -35,12 +35,16 @@ function addBook() {
         return;
     }
 
-    books.push(title.trim());
+    const trimmedTitle = title.trim();
+    books.push(trimmedTitle);
     foundBooks = [];
-    render();
-}
 
-function searchBook() {
+    const item = document.createElement('li');
+    item.textContent = trimmedTitle;
+    bookList.appendChild(item);
+};
+
+const searchBook = () => {
     const query = prompt('Введите название книги для поиска');
 
     foundBooks = [];
@@ -48,7 +52,7 @@ function searchBook() {
     if (query !== null && query.trim() !== '') {
         const search = query.trim().toLowerCase();
 
-        books.forEach(function (book, index) {
+        books.forEach((book, index) => {
             if (book.toLowerCase().includes(search)) {
                 foundBooks.push(index);
             }
@@ -60,7 +64,7 @@ function searchBook() {
     }
 
     render();
-}
+};
 
 addButton.addEventListener('click', addBook);
 searchButton.addEventListener('click', searchBook);

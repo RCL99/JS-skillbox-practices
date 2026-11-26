@@ -9,28 +9,28 @@
 <body>
     <h1>Опрос пользователя</h1>
 
-    <form id="survey-form" novalidate>
+    <form class="survey-form" novalidate>
         <div class="field">
             <label for="name">Имя пользователя:</label>
-            <input type="text" id="name" name="name">
-            <span id="name-error" class="error"></span>
+            <input type="text" id="name" name="name" required>
+            <span class="name-error error"></span>
         </div>
 
         <div class="field">
             <label for="email">Email:</label>
-            <input type="text" id="email" name="email">
-            <span id="email-error" class="error"></span>
+            <input type="email" id="email" name="email" required>
+            <span class="email-error error"></span>
         </div>
 
         <div class="field">
             <span>Пол:</span>
-            <label><input type="radio" name="gender" value="Мужской"> Мужской</label>
-            <label><input type="radio" name="gender" value="Женский"> Женский</label>
+            <label><input type="radio" name="gender" value="Мужской" required> Мужской</label>
+            <label><input type="radio" name="gender" value="Женский" required> Женский</label>
         </div>
 
         <div class="field">
-            <label for="rating">Оценка сервиса: <span id="rating-value">5</span></label>
-            <input type="range" id="rating" name="rating" min="1" max="10" value="5">
+            <label for="rating">Оценка сервиса: <span class="rating-value">5</span></label>
+            <input type="range" id="rating" name="rating" min="1" max="10" value="5" required>
         </div>
 
         <div class="field">
@@ -46,10 +46,10 @@
             <textarea id="comments" name="comments"></textarea>
         </div>
 
-        <button type="submit" id="submit">Отправить</button>
+        <button type="submit">Отправить</button>
     </form>
 
-    <div id="result"></div>
+    <div class="result"></div>
 
     <script src="index.js"></script>
 </body>

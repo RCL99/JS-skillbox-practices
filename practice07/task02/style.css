@@ -19,19 +19,19 @@ button {
     cursor: pointer;
 }
 
-#add-height {
+.add-height {
     background-color: green;
 }
 
-#filter-heights {
+.filter-heights {
     background-color: orange;
 }
 
-#height-list {
+.height-list {
     list-style: none;
     padding: 0;
 }
 
-#height-list li {
+.height-list li {
     padding: 4px 0;
 }

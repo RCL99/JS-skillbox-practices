@@ -1,32 +1,28 @@
 const prices = [100, 500, 250, 750, 300];
 
-const ascButton = document.getElementById('sort-asc');
-const descButton = document.getElementById('sort-desc');
-const priceList = document.getElementById('price-list');
+const ascButton = document.querySelector('.sort-asc');
+const descButton = document.querySelector('.sort-desc');
+const priceList = document.querySelector('.price-list');
 
-function render() {
+const render = () => {
     priceList.innerHTML = '';
 
-    prices.forEach(function (price) {
+    prices.forEach((price) => {
         const item = document.createElement('li');
         item.textContent = price + ' руб.';
         priceList.appendChild(item);
     });
-}
+};
 
-function sortAsc() {
-    prices.sort(function (a, b) {
-        return a - b;
-    });
+const sortAsc = () => {
+    prices.sort((a, b) => a - b);
     render();
-}
+};
 
-function sortDesc() {
-    prices.sort(function (a, b) {
-        return b - a;
-    });
+const sortDesc = () => {
+    prices.sort((a, b) => b - a);
     render();
-}
+};
 
 ascButton.addEventListener('click', sortAsc);
 descButton.addEventListener('click', sortDesc);

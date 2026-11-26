@@ -19,11 +19,11 @@ button {
     cursor: pointer;
 }
 
-#sort-asc {
+.sort-asc {
     background-color: green;
 }
 
-#sort-desc {
+.sort-desc {
     background-color: blue;
 }
 

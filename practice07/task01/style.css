@@ -19,24 +19,24 @@ button {
     cursor: pointer;
 }
 
-#add-book {
+.add-book {
     background-color: green;
 }
 
-#search-book {
+.search-book {
     background-color: blue;
 }
 
-#book-list {
+.book-list {
     list-style: none;
     padding: 0;
 }
 
-#book-list li {
+.book-list li {
     padding: 4px 0;
 }
 
-#book-list li.found {
+.book-list li.found {
     background-color: yellow;
     font-weight: bold;
 }

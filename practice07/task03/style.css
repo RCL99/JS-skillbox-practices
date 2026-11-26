@@ -19,15 +19,15 @@ button {
     cursor: pointer;
 }
 
-#add-product {
+.add-product {
     background-color: green;
 }
 
-#product-list {
+.product-list {
     list-style: none;
     padding: 0;
 }
 
-#product-list li {
+.product-list li {
     padding: 4px 0;
 }

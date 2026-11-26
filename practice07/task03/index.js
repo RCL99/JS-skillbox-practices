@@ -1,32 +1,24 @@
 const products = ['Яблоко', 'Арбуз', 'Банан', 'Молоко', 'Хлеб'];
 
-const productList = document.getElementById('product-list');
-const addButton = document.getElementById('add-product');
+const productList = document.querySelector('.product-list');
+const addButton = document.querySelector('.add-product');
 
-function sortProducts() {
-    products.sort(function (a, b) {
-        if (a > b) {
-            return 1;
-        }
-        if (a < b) {
-            return -1;
-        }
-        return 0;
-    });
-}
+const sortProducts = () => {
+    products.sort((a, b) => a.localeCompare(b, 'ru'));
+};
 
-function render() {
+const render = () => {
     sortProducts();
     productList.innerHTML = '';
 
-    products.forEach(function (product) {
+    products.forEach((product) => {
         const item = document.createElement('li');
         item.textContent = product;
         productList.appendChild(item);
     });
-}
+};
 
-function addProduct() {
+const addProduct = () => {
     const input = prompt('Введите название товара');
 
     if (input === null || input.trim() === '') {
@@ -34,9 +26,19 @@ function addProduct() {
         return;
     }
 
-    products.push(input.trim());
-    render();
-}
+    const trimmed = input.trim();
+    products.push(trimmed);
+
+    const insertIndex = products.findIndex(p => p.localeCompare(trimmed, 'ru') > 0);
+    const item = document.createElement('li');
+    item.textContent = trimmed;
+
+    if (insertIndex === -1) {
+        productList.appendChild(item);
+    } else {
+        productList.insertBefore(item, productList.children[insertIndex]);
+    }
+};
 
 addButton.addEventListener('click', addProduct);
 

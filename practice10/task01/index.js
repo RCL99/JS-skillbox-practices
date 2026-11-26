@@ -1,7 +1,7 @@
-const thumbnails = document.querySelectorAll('.thumbnail');
-const fullImage = document.getElementById('full-image');
+const thumbnailsContainer = document.querySelector('.thumbnails');
+const fullImage = document.querySelector('.full-image');
 
-function showImage(thumbnail) {
+const showImage = (thumbnail) => {
     const url = thumbnail.getAttribute('src');
 
     fullImage.innerHTML = '';
@@ -11,14 +11,15 @@ function showImage(thumbnail) {
     image.setAttribute('alt', thumbnail.getAttribute('alt'));
     fullImage.appendChild(image);
 
-    thumbnails.forEach(function (item) {
+    document.querySelectorAll('.thumbnail').forEach((item) => {
         item.classList.remove('active');
     });
     thumbnail.classList.add('active');
-}
+};
 
-thumbnails.forEach(function (thumbnail) {
-    thumbnail.addEventListener('click', function () {
+thumbnailsContainer.addEventListener('click', (event) => {
+    const thumbnail = event.target.closest('.thumbnail');
+    if (thumbnail) {
         showImage(thumbnail);
-    });
+    }
 });

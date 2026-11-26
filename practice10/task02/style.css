@@ -15,11 +15,11 @@ button {
     cursor: pointer;
 }
 
-#add-item {
+.add-item {
     background-color: green;
 }
 
-#remove-item {
+.remove-item {
     background-color: red;
 }
 

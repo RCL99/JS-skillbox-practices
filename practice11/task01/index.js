@@ -1,82 +1,62 @@
-const form = document.getElementById('survey-form');
-const result = document.getElementById('result');
+const form = document.querySelector('.survey-form');
+const result = document.querySelector('.result');
 
 const nameInput = document.getElementById('name');
-const nameError = document.getElementById('name-error');
-
+const nameError = document.querySelector('.name-error');
 const emailInput = document.getElementById('email');
-const emailError = document.getElementById('email-error');
-
+const emailError = document.querySelector('.email-error');
 const ratingInput = document.getElementById('rating');
-const ratingValue = document.getElementById('rating-value');
+const ratingValue = document.querySelector('.rating-value');
 
-const commentsInput = document.getElementById('comments');
-
-function validateName() {
-    if (nameInput.value.trim() === '') {
-        nameError.textContent = 'Введите имя';
+const validateField = (value, errorText, errorElement) => {
+    if (value === '') {
+        errorElement.textContent = errorText;
         return false;
     }
-
-    nameError.textContent = '';
+    errorElement.textContent = '';
     return true;
-}
+};
 
-function validateEmail() {
-    const email = emailInput.value.trim();
+const validateEmail = (email) => {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (email === '') {
-        emailError.textContent = 'Введите email';
-        return false;
-    }
-
     if (!pattern.test(email)) {
         emailError.textContent = 'Неверный формат email';
         return false;
     }
-
     emailError.textContent = '';
     return true;
-}
+};
 
-function showResult() {
-    const gender = form.querySelector('input[name="gender"]:checked');
-    const interests = form.querySelectorAll('input[name="interest"]:checked');
+const showResult = () => {
+    const formData = new FormData(form);
 
-    const interestNames = [];
-    interests.forEach((item) => {
-        interestNames.push(item.value);
-    });
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const gender = formData.get('gender');
+    const rating = formData.get('rating');
+    const interests = formData.getAll('interest');
+    const comments = formData.get('comments');
 
     const data = [
-        'Имя: ' + nameInput.value.trim(),
-        'Email: ' + emailInput.value.trim(),
-        'Пол: ' + (gender ? gender.value : 'не выбран'),
-        'Оценка сервиса: ' + ratingInput.value,
-        'Интересы: ' + (interestNames.length > 0 ? interestNames.join(', ') : 'не выбраны'),
-        'Комментарии: ' + (commentsInput.value.trim() !== '' ? commentsInput.value.trim() : 'нет')
+        `Имя: ${name}`,
+        `Email: ${email}`,
+        `Пол: ${gender || 'не выбран'}`,
+        `Оценка сервиса: ${rating}`,
+        `Интересы: ${interests.length > 0 ? interests.join(', ') : 'не выбраны'}`,
+        `Комментарии: ${comments || 'нет'}`
     ];
 
     result.innerHTML = '';
 
-    const title = document.createElement('h2');
-    title.textContent = 'Данные пользователя';
-    result.appendChild(title);
-
     const list = document.createElement('ul');
-
-    data.forEach((text) => {
-        const item = document.createElement('li');
-        item.textContent = text;
-        list.appendChild(item);
+    data.forEach((item) => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        list.appendChild(li);
     });
 
     result.appendChild(list);
-}
-
-nameInput.addEventListener('input', validateName);
-emailInput.addEventListener('input', validateEmail);
+};
 
 ratingInput.addEventListener('input', () => {
     ratingValue.textContent = ratingInput.value;
@@ -85,8 +65,13 @@ ratingInput.addEventListener('input', () => {
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const nameOk = validateName();
-    const emailOk = validateEmail();
+    const formData = new FormData(form);
+
+    const name = formData.get('name');
+    const email = formData.get('email');
+
+    const nameOk = validateField(name, 'Введите имя', nameError);
+    const emailOk = validateField(email, 'Введите email', emailError) && validateEmail(email);
 
     if (nameOk && emailOk) {
         showResult();
