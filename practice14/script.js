@@ -37,11 +37,15 @@ function loadFilms() {
 }
 
 function saveFilms() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(films));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(films));
 }
 
 function findFilm(id) {
     return films.find((film) => film.id === id);
+}
+
+function getRow(id) {
+    return tbody.querySelector(`tr[data-id="${id}"]`);
 }
 
 function readForm() {
@@ -55,7 +59,7 @@ function readForm() {
         return null;
     }
 
-    return {title, genre, year, watched: watchedInput.checked};
+    return { title, genre, year, watched: watchedInput.checked };
 }
 
 function createRow(film) {
@@ -74,6 +78,13 @@ function createRow(film) {
     `;
 
     return row;
+}
+
+function updateRow(row, film) {
+    row.cells[0].textContent = film.title;
+    row.cells[1].textContent = film.genre;
+    row.cells[2].textContent = film.year;
+    row.cells[3].textContent = film.watched ? 'Да' : 'Нет';
 }
 
 function renderAll() {
@@ -96,13 +107,16 @@ function handleSubmit(event) {
     }
 
     if (editingId === null) {
-        films.push({id: createId(), ...data});
+        const newFilm = { id: createId(), ...data };
+        films.push(newFilm);
+        tbody.append(createRow(newFilm));
     } else {
-        Object.assign(findFilm(editingId), data);
+        const film = findFilm(editingId);
+        Object.assign(film, data);
+        updateRow(getRow(editingId), film);
     }
 
     saveFilms();
-    renderAll();
     resetForm();
 }
 
@@ -121,13 +135,13 @@ function startEdit(id) {
 
 function deleteFilm(id) {
     films = films.filter((film) => film.id !== id);
+    getRow(id).remove();
 
     if (editingId === id) {
         resetForm();
     }
 
     saveFilms();
-    renderAll();
 }
 
 function handleTableClick(event) {
@@ -148,9 +162,9 @@ function handleTableClick(event) {
 function sortFilms() {
     const key = sortSelect.value;
 
-    films.sort((a, b) => {
-        return key === 'year' ? a.year - b.year : a[key].localeCompare(b[key])
-    });
+    films.sort((a, b) =>
+        typeof a[key] === 'number' ? a[key] - b[key] : a[key].localeCompare(b[key])
+    );
 
     renderAll();
 }
@@ -160,4 +174,4 @@ tbody.addEventListener('click', handleTableClick);
 btnCancel.addEventListener('click', resetForm);
 btnSort.addEventListener('click', sortFilms);
 
-renderAll()
+renderAll();
